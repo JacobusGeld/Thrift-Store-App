@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ release.title }}</title>
+
+    <!-- 🔥 Bootstrap 5 CDN -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <style>
+        body {
+            background-color: #121212;
+            color: #fff;
+        }
+
+        .card {
+            background-color: #1e1e1e;
+            border: none;
+        }
+
+        .table {
+            color: #fff;
+        }
+
+        .table th {
+            width: 30%;
+        }
+
+        .badge-demand {
+            background-color: #ff9800;
+        }
+
+        .price-highlight {
+            font-weight: bold;
+            color: #00e676;
+        }
+        .btn {
+            border-radius: 5px;
+            padding: 16px 24px;
+            width: 250px !important;
+        }        
+    </style>
+</head>
+<body>
+
+<div class="container py-5">
+
+    <!-- 🔥 Header -->
+    <div class="text-center mb-4">
+        <h1>{{ release.title }}</h1>
+        <h4 class="text-white-75">{{ release.artist }}</h4>
+    </div>
+
+    <div class="row">
+
+        <!-- 🖼️ Cover Image -->
+        <div class="col-md-4 text-center">
+            {% if release.cover %}
+                <img src="{{ release.cover }}" class="img-fluid rounded shadow">
+            {% endif %}
+        </div>
+
+        <!-- 📊 Details -->
+        <div class="col-md-8">
+            <div class="card p-3 shadow">
+
+                <table class="table table-dark table-striped">
+                    <tbody>
+                        <tr><th>Year</th><td>{{ release.year }}</td></tr>
+                        <tr><th>Country</th><td>{{ release.country }}</td></tr>
+                        <tr><th>Genres</th><td>{{ release.genres }}</td></tr>
+                        <tr><th>Styles</th><td>{{ release.styles }}</td></tr>
+                        <tr><th>Format</th><td>{{ release.formats }}</td></tr>
+
+                        <tr><th>Label</th><td>{{ release.label }}</td></tr>
+                        <tr><th>Catalog No</th><td>{{ release.catno }}</td></tr>
+
+                        <tr>
+                            <th>Rating</th>
+                            <td>
+                                {{ release.rating }} ⭐ ({{ release.rating_count }} votes)
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <th>Popularity</th>
+                            <td>
+                                Have: {{ release.have }} |
+                                Want: {{ release.want }}
+                                {% if release.want > release.have %}
+                                    <span class="badge badge-demand ms-2">🔥 High Demand</span>
+                                {% endif %}
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <th>Estimated Value</th>
+                            <td class="price-highlight">
+                                R{{ release.fallback_price_zar }}
+                            </td>
+                        </tr>
+                        
+                        <tr>
+                            <th>Recommended Price</th>
+                            <td class="price-highlight">R{{ release.recommended_price_zar }}</td>
+                        </tr>
+
+                        <tr>
+                            <th>Listings</th>
+                            <td>{{ release.num_for_sale }} for sale</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+            </div>
+        </div>
+
+    </div>
+
+    <!-- 🎧 Tracklist -->
+    <div class="accordion mt-5" id="trackAccordion">
+
+        <div class="accordion-item bg-dark text-white border-secondary">
+            
+            <h2 class="accordion-header" id="headingTracks">
+                <button class="accordion-button collapsed bg-dark text-white" 
+                        type="button" 
+                        data-bs-toggle="collapse" 
+                        data-bs-target="#collapseTracks">
+                    🎧 Tracklist
+                </button>
+            </h2>
+    
+            <div id="collapseTracks" 
+                 class="accordion-collapse collapse" 
+                 data-bs-parent="#trackAccordion">
+    
+                <div class="accordion-body">
+    
+                    <ul class="list-group list-group-flush">
+                        {% for track in release.tracklist %}
+                            <li class="list-group-item bg-dark text-white border-secondary">
+                                {{ track }}
+                            </li>
+                        {% endfor %}
+                    </ul>
+    
+                </div>
+            </div>
+    
+        </div>
+    
+    </div>
+
+    <!-- 🔗 Links -->
+    <div class="text-center mt-4">
+
+        <!-- 💾 Save Button -->
+        <button class="btn btn-success me-2">
+            Save
+        </button>
+    
+        <!-- 🔙 Back Button -->
+        <a href="/vinyl" class="btn btn-secondary me-2">
+            Back
+        </a>
+
+    </div>
+
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+</html>

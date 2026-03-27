@@ -1,15 +1,65 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
     <title>Dashboard</title>
+
+    <!-- Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <style>
+        body {
+            background-color: #121212;
+            color: white;
+        }
+
+        .card {
+            background-color: #1e1e1e;
+            border: none;
+            transition: transform 0.2s ease;
+        }
+
+        .card:hover {
+            transform: scale(1.03);
+        }
+    </style>
 </head>
 <body>
 
-    <h2>Welcome {{ user }}</h2>
+<!-- 🔥 NAVBAR -->
+<nav class="navbar navbar-dark bg-dark px-4">
+    <a class="navbar-brand" href="/dashboard">🎵 Vinyl App</a>
 
-    <p>You are logged in 🎉</p>
+    <div class="d-flex align-items-center">
+        <span class="me-3">👋 {{ user }}</span>
+        <a href="/logout" class="btn btn-outline-light btn-sm">Logout</a>
+    </div>
+</nav>
 
-    <a href="/logout">Logout</a>
+<div class="container py-5">
+
+    <!-- Header -->
+    <div class="text-center mb-5">
+        <h1>Dashboard</h1>
+        <p class="text-secondary">What would you like to do?</p>
+    </div>
+
+    <!-- Actions -->
+    <div class="row justify-content-center g-4">
+
+        <!-- Vinyl Search -->
+        <div class="col-md-4">
+            <a href="/vinyl" class="text-decoration-none">
+                <div class="card text-light p-4 text-center shadow">
+                    <h3>🎵 Vinyl Appraisal</h3>
+                    <p class="text-light">Vinyl Listings and Prices</p>
+                </div>
+            </a>
+        </div>
+
+    </div>
+
+</div>
 
 </body>
 </html>
